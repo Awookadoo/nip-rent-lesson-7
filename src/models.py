@@ -49,6 +49,18 @@ class Tenant(BaseModel):
         assert isinstance(data, dict), "Expected a dictionary of tenants"
         return {key: Tenant(**tenant) for key, tenant in data.items()}
     
+class BlackList(BaseModel):
+    name: str
+    reason: str
+
+    @staticmethod
+    def from_json_file(file_path: str) -> Dict[str,'BlackList']:
+        data = None
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        assert isinstance(data, dict), "Expected a dictionary of blacklisted tenants"
+        return {key: BlackList(**black_list) for key, black_list in data.items()}
+    
 
 class Transfer(BaseModel):
     amount_pln: float

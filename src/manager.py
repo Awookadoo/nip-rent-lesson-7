@@ -1,4 +1,4 @@
-from src.models import Apartment, Bill, Parameters, Tenant, TenantSettlement, Transfer, ApartmentSettlement
+from src.models import Apartment, Bill, Parameters, Tenant, TenantSettlement, Transfer, ApartmentSettlement, BlackList
 from typing import List, Tuple
 
 class Manager:
@@ -9,6 +9,7 @@ class Manager:
         self.tenants = {}
         self.transfers = []
         self.bills = []
+        self.black_list = {}
        
         self.load_data()
 
@@ -17,10 +18,17 @@ class Manager:
         self.tenants = Tenant.from_json_file(self.parameters.tenants_json_path)
         self.transfers = Transfer.from_json_file(self.parameters.transfers_json_path)
         self.bills = Bill.from_json_file(self.parameters.bills_json_path)
+        self.black_list = BlackList.from_json_file(self.parameters.black_list_json_path)
 
     def check_tenants_apartment_keys(self) -> bool:
         for tenant in self.tenants.values():
             if tenant.apartment not in self.apartments:
+                return False
+        return True
+    
+    def check_black_list_keys(self) -> bool:
+        for black_list in self.black_list.values():
+            if black_list.name not in self.tenants:
                 return False
         return True
     

@@ -85,3 +85,10 @@ def test_apartment_has_any_bills():
 
     has_bills = manager.has_any_bills('apart-polanka', 2025, 3)
     assert has_bills == False
+    
+def extreme_value_validation_system():
+    manager = Manager(Parameters())
+    minimal_value = -1e9
+    maximal_value = 1e9
+    assert minimal_value < manager.calculate_tax(2025, 1, 0.085) < maximal_value
+    assert minimal_value < manager.check_deposits() < maximal_value

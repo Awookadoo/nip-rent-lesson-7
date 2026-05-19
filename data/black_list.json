@@ -1,0 +1,14 @@
+{
+    "forbidden_1": {
+        "name": "Jan Kopak",
+        "reason": "kopal dziury"
+    },
+    "forbidden_2": {
+        "name": "Zofia Szpak",
+        "reason": "zwierzeta nie dozwolone"
+    },
+    "forbidden_3": {
+        "name": "Adam Impreza",
+        "reason": "zakaz imprezowania"
+    }
+}
