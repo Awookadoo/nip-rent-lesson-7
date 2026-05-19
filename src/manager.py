@@ -24,11 +24,29 @@ class Manager:
                 return False
         return True
     
+    def check_transfers(self):
+        for transfer in self.transfers:
+            if (transfer.amount_pln <= 0):
+                raise ValueError("amount_pln must be greater then 0")
+            
+            if (transfer.date is None or transfer.date == ""):
+                raise ValueError("transfer date must be set")
+            
+            if (transfer.settlement_month < 1 or transfer.settlement_month > 12):
+                raise ValueError("Month must be between 1 and 12")
+            
+            if (transfer.settlement_year < 2000):
+                raise ValueError("Year is below 2000")
+            
+            if (transfer.tenant is None):
+                raise ValueError("tenant is None")
+            elif (transfer.tenant not in self.tenants):
+                raise ValueError("tenant is not exists in Tenants list")
+    
     def get_apartment(self, apartment_key: str) -> Apartment | None:
         if apartment_key not in self.apartments:
             return None
         return self.apartments[apartment_key]
-
 
     def get_apartment_costs(self, apartment_key: str, year: int = None, month: int = None) -> float | None:
         if month is not None and (month < 1 or month > 12):

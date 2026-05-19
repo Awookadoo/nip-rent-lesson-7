@@ -85,3 +85,15 @@ def test_apartment_has_any_bills():
 
     has_bills = manager.has_any_bills('apart-polanka', 2025, 3)
     assert has_bills == False
+    
+def test_blacklist():
+    manager = Manager(Parameters())
+    
+    assert manager.check_black_list_keys() == True
+    
+    manager.black_list.append(BlackList(
+        name='Jan Nowak',
+        reason="Jadł zupę widelcem"
+    ))
+    
+    assert manager.check_black_list_keys() == False
