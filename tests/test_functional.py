@@ -85,3 +85,16 @@ def test_apartment_has_any_bills():
 
     has_bills = manager.has_any_bills('apart-polanka', 2025, 3)
     assert has_bills == False
+
+def test_transfers():
+    manager = Manager(Parameters())
+    
+    
+    manager.transfers.append(Transfer(
+        amount_pln= -10,
+        date= "2025-01-04",
+        settlement_year= 2025,
+        settlement_month= 1,
+        tenant= "tenant-1"
+    ))
+    assert 
