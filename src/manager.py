@@ -25,8 +25,10 @@ class Manager:
         return True
     
     def get_apartment(self, apartment_key: str) -> Apartment | None:
-        if apartment_key not in self.apartments:
-            return None
+        try:            return self.apartments[apartment_key]
+        except KeyError:            return None
+        #if apartment_key not in self.apartments:
+        #    return None
         return self.apartments[apartment_key]
 
 
